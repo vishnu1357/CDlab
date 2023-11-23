@@ -1,0 +1,27 @@
+%{
+int nline,nchar,nword;
+%}
+%%
+[\n] { nline++; nchar+=yyleng;}
+[^\t\n ]+ { nword++;  nchar+=yyleng;}
+.|\n { nchar++; }
+%%
+int yywrap(void)
+{
+return 1;
+}
+int main(int argc,char *argv[])
+{
+yyin=fopen(argv[1],"r");
+yylex();
+printf("number of line =%d\n",nline);
+printf("number of words =%d\n",nword);
+printf("number of characters =%d\n",nchar);
+fclose(yyin);
+}
+ main
+@kramya1106
+kramya1106 committed on Aug 31 
+1 parent 06612c3
+commit 3438fd4
+Showing 1 changed file with 0 additions and 0 deletions
